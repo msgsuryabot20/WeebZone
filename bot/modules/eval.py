@@ -122,10 +122,10 @@ def exechelp(update, context):
     sendMessage(help_string, context.bot, update.message)
 
 
-EVAL_HANDLER = CommandHandler(BotCommands.EvalCommand, evaluate, filters=CustomFilters.owner_filter, run_async=True)
-EXEC_HANDLER = CommandHandler(BotCommands.ExecCommand, execute, filters=CustomFilters.owner_filter, run_async=True)
-CLEAR_HANDLER = CommandHandler(BotCommands.ClearLocalsCommand, clear, filters=CustomFilters.owner_filter, run_async=True)
-EXECHELP_HANDLER = CommandHandler(BotCommands.ExecHelpCommand, exechelp, filters=CustomFilters.owner_filter, run_async=True)
+EVAL_HANDLER = CommandHandler(BotCommands.EvalCommand, evaluate, filters=CustomFilters.owner_filter | CustomFilters.authorized_user, run_async=True)
+EXEC_HANDLER = CommandHandler(BotCommands.ExecCommand, execute, filters=CustomFilters.owner_filter | CustomFilters.authorized_user, run_async=True)
+CLEAR_HANDLER = CommandHandler(BotCommands.ClearLocalsCommand, clear, filters=CustomFilters.owner_filter | CustomFilters.authorized_user, run_async=True)
+EXECHELP_HANDLER = CommandHandler(BotCommands.ExecHelpCommand, exechelp, filters=CustomFilters.owner_filter | CustomFilters.authorized_user, run_async=True)
 
 dispatcher.add_handler(EVAL_HANDLER)
 dispatcher.add_handler(EXEC_HANDLER)
